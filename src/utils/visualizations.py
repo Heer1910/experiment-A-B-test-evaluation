@@ -124,10 +124,16 @@ def create_ci_plot(cvr_inf):
         conclusion = "CI includes zero - Not statistically significant"
         color = '#757575'
     
-    fig.text(0.5, 0.02, conclusion, ha='center', fontsize=11, 
+    # Adjust layout first to make room for bottom text
+    plt.tight_layout()
+    
+    # Add conclusion text below the plot with more space
+    fig.text(0.5, 0.01, conclusion, ha='center', fontsize=10, 
              style='italic', weight='bold', color=color)
     
-    plt.tight_layout()
+    # Add extra bottom margin to prevent overlap
+    plt.subplots_adjust(bottom=0.15)
+    
     return fig
 
 
