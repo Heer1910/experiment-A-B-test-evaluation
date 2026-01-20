@@ -65,45 +65,6 @@ Using synthetic experiment data with documented ground truth, this demonstrates:
 
 ---
 
-## Quick Start
-
-### Using Makefile (Recommended)
-
-```bash
-make data validate metrics visualize test
-```
-
-### Manual Steps
-
-```bash
-# 1. Install dependencies (pinned versions)
-pip install -r requirements.txt
-
-# 2. Generate synthetic data
-python src/data_generation/generator.py
-
-# 3. Validate data quality
-PYTHONPATH=. python src/validation/checks.py
-
-# 4. Compute metrics and run inference
-PYTHONPATH=. python src/metrics/compute.py
-PYTHONPATH=. python src/stats/inference.py
-
-# 5. Generate visualizations
-PYTHONPATH=. python src/utils/visualizations.py
-
-# 6. Run tests
-pytest tests/ -v
-```
-
-### View Outputs
-
-- **Executive Summary:** `reports/executive_summary.md`
-- **Figures:** `figures/*.png`
-- **Notebook:** `notebooks/ab_test_analysis.ipynb`
-
----
-
 ## Project Structure
 
 ```
@@ -185,31 +146,6 @@ IF cvr_lift > 0
    AND guardrails_ok 
 THEN ship
 ELSE investigate/iterate
-```
-
----
-
-## Testing
-
-### Automated Tests
-
-```bash
-pytest tests/ -v
-```
-
-Validates:
-- Schema detection (fails on missing columns)
-- SRM detection (flags skewed 90/10 allocations)
-- Confidence interval bounds (correct ordering)
-- MDE computation (scales inversely with sample size)
-
-### Reproducibility Test
-
-```bash
-python src/data_generation/generator.py  # Run 1
-mv data/experiment_users.parquet data/v1.parquet
-python src/data_generation/generator.py  # Run 2
-diff data/experiment_users.parquet data/v1.parquet  # Should be identical
 ```
 
 ---
