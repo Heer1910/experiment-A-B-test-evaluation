@@ -19,9 +19,11 @@ ENV/
 # pytest
 .pytest_cache/
 
-# Data files (large - don't commit to GitHub)
-data/*.parquet
-data/*.csv
+# Data files - do not commit generated data
+data/
+*.parquet
+*.csv
+*.pkl
 
 # IDE
 .vscode/
